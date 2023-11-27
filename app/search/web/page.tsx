@@ -9,7 +9,7 @@ interface Props {
 }
 
 const WebSearchPage = async ({ searchParams }: Props) => {
-  await new Promise((resolve) => setTimeout(resolve, 3000))
+  await new Promise((resolve) => setTimeout(resolve, 2000))
   const responce = await fetch(
     `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.searchTerm}`
   );
