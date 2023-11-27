@@ -1,18 +1,21 @@
 import { SearchData } from "@/app/types";
 import Link from "next/link";
-import WebSearchResults from "../_components/WebSearchResults";
 import ImageSearchResults from "../_components/ImageSearchResults";
 
 interface Props {
   searchParams: {
     searchTerm: string;
+    start: string;
   };
 }
 
 const ImageSearchPage = async ({ searchParams }: Props) => {
+
+  const startIndex = searchParams.start || "1";
+
   await new Promise((resolve) => setTimeout(resolve, 3000));
   const responce = await fetch(
-    `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.searchTerm}&searchType=image`
+    `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.searchTerm}&searchType=image&start=${startIndex}`
   );
 
   if (!responce.ok) {

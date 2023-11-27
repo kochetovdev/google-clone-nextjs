@@ -5,13 +5,17 @@ import WebSearchResults from "../_components/WebSearchResults";
 interface Props {
   searchParams: {
     searchTerm: string;
+    start: string;
   };
 }
 
 const WebSearchPage = async ({ searchParams }: Props) => {
+
+  const startIndex = searchParams.start || "1";
+
   await new Promise((resolve) => setTimeout(resolve, 2000))
   const responce = await fetch(
-    `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.searchTerm}`
+    `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.searchTerm}&start=${startIndex}`
   );
 
   if (!responce.ok) {
